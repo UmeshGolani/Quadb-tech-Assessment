@@ -1,0 +1,12 @@
+fn is_palindrome(s: &str) -> bool {
+    // Remove spaces and convert to lowercase for case-insensitive comparison
+    let s = s.chars().filter(|c| c.is_alphanumeric()).collect::<String>().to_lowercase();
+    
+    // Compare the string with its reverse
+    s == s.chars().rev().collect::<String>()
+}
+
+fn main() {
+    let string = "A man a plan a canal Panama";
+    println!("{}", is_palindrome(string)); // Output: true
+}
