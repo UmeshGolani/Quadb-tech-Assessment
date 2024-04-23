@@ -1,0 +1,33 @@
+fn merge_sorted_arrays(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
+    let mut result = Vec::with_capacity(nums1.len() + nums2.len());
+    let (mut i, mut j) = (0, 0);
+
+    while i < nums1.len() && j < nums2.len() {
+        if nums1[i] <= nums2[j] {
+            result.push(nums1[i]);
+            i += 1;
+        } else {
+            result.push(nums2[j]);
+            j += 1;
+        }
+    }
+
+    while i < nums1.len() {
+        result.push(nums1[i]);
+        i += 1;
+    }
+
+    while j < nums2.len() {
+        result.push(nums2[j]);
+        j += 1;
+    }
+
+    result
+}
+
+fn main() {
+    let nums1 = vec![1, 3, 5, 7];
+    let nums2 = vec![2, 4, 6, 8];
+    let merged = merge_sorted_arrays(nums1, nums2);
+    println!("Merged array: {:?}", merged);
+}
