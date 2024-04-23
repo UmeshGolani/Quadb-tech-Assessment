@@ -1,0 +1,36 @@
+fn partition(arr: &mut [i32]) -> usize {
+    let pivot_index = arr.len() / 2;
+    arr.swap(pivot_index, arr.len() - 1);
+    let mut i = 0;
+    for j in 0..arr.len() - 1 {
+        if arr[j] < arr[arr.len() - 1] {
+            arr.swap(i, j);
+            i += 1;
+        }
+    }
+    arr.swap(i, arr.len() - 1);
+    i
+}
+
+fn kth_smallest_element(arr: &mut [i32], k: usize) -> i32 {
+    let mut left = 0;
+    let mut right = arr.len();
+
+    loop {
+        let pivot_index = partition(&mut arr[left..right]);
+        if pivot_index == k {
+            return arr[pivot_index];
+        } else if pivot_index < k {
+            left = pivot_index + 1;
+        } else {
+            right = pivot_index;
+        }
+    }
+}
+
+fn main() {
+    let mut arr = [3, 1, 4, 2, 5];
+    let k = 2; // Find the 2nd smallest element
+    let kth_smallest = kth_smallest_element(&mut arr, k - 1);
+    println!("The {}th smallest element is: {}", k, kth_smallest);
+}
